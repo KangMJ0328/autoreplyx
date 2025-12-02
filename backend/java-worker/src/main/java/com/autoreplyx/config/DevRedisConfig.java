@@ -22,7 +22,7 @@ import java.util.Map;
  * This allows running the application without a real Redis server.
  */
 @Configuration
-@Profile("dev")
+@Profile({"dev", "prod"})
 public class DevRedisConfig {
 
     private final Map<String, String> stringStore = new ConcurrentHashMap<>();
