@@ -34,7 +34,8 @@
       "Bash(git branch:*)",
       "Bash(git push:*)",
       "Bash(git config:*)",
-      "Bash(git remote remove:*)"
+      "Bash(git remote remove:*)",
+      "Bash(del \"c:\\Users\\ddd\\Desktop\\User Authentication Flow\\backend\\java-worker\\src\\main\\java\\com\\autoreplyx\\config\\RedisConfig.java\")"
     ],
     "deny": [],
     "ask": []
