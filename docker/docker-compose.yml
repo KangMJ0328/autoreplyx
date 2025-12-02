@@ -1,0 +1,82 @@
+version: '3.8'
+
+services:
+  # Nginx - 리버스 프록시
+  nginx:
+    image: nginx:alpine
+    container_name: autoreplyx-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - api
+    networks:
+      - autoreplyx-network
+    restart: unless-stopped
+
+  # Java API (Spring Boot - API + Worker 통합)
+  api:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.java
+    container_name: autoreplyx-api
+    environment:
+      - SPRING_PROFILES_ACTIVE=production
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/autoreplyx?useSSL=false&serverTimezone=Asia/Seoul
+      - SPRING_DATASOURCE_USERNAME=autoreplyx
+      - SPRING_DATASOURCE_PASSWORD=${DB_PASSWORD}
+      - SPRING_DATA_REDIS_HOST=redis
+      - SPRING_DATA_REDIS_PORT=6379
+      - JWT_SECRET=${JWT_SECRET}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - INSTAGRAM_APP_ID=${INSTAGRAM_APP_ID}
+      - INSTAGRAM_APP_SECRET=${INSTAGRAM_APP_SECRET}
+    depends_on:
+      - mysql
+      - redis
+    networks:
+      - autoreplyx-network
+    restart: unless-stopped
+
+  # MySQL Database
+  mysql:
+    image: mysql:8.0
+    container_name: autoreplyx-mysql
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+      - MYSQL_DATABASE=autoreplyx
+      - MYSQL_USER=autoreplyx
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ../docs/database_schema.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    ports:
+      - "3306:3306"
+    networks:
+      - autoreplyx-network
+    restart: unless-stopped
+
+  # Redis Cache & Queue
+  redis:
+    image: redis:7-alpine
+    container_name: autoreplyx-redis
+    command: redis-server --appendonly yes
+    volumes:
+      - redis-data:/data
+    ports:
+      - "6379:6379"
+    networks:
+      - autoreplyx-network
+    restart: unless-stopped
+
+networks:
+  autoreplyx-network:
+    driver: bridge
+
+volumes:
+  mysql-data:
+  redis-data:

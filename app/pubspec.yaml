@@ -1,0 +1,98 @@
+name: autoreplyx_app
+description: "AutoReplyX - AI 기반 인스타그램 자동 응답 서비스"
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.10.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+
+  # State Management
+  flutter_riverpod: ^2.6.1
+  riverpod_annotation: ^2.6.1
+
+  # Routing
+  go_router: ^14.6.2
+
+  # Network
+  dio: ^5.7.0
+  retrofit: ^4.4.1
+
+  # Local Storage
+  shared_preferences: ^2.3.3
+  flutter_secure_storage: ^9.2.2
+
+  # JSON Serialization
+  json_annotation: ^4.9.0
+  freezed_annotation: ^2.4.4
+
+  # UI Components
+  flutter_svg: ^2.0.10+1
+  cached_network_image: ^3.4.1
+  shimmer: ^3.0.0
+  flutter_spinkit: ^5.2.1
+
+  # Forms & Validation
+  flutter_form_builder: ^10.2.0
+  form_builder_validators: ^11.0.0
+
+  # Utils
+  intl: any
+  url_launcher: ^6.3.1
+  package_info_plus: ^8.1.0
+  connectivity_plus: ^6.1.0
+
+  # Push Notifications
+  firebase_core: ^3.8.0
+  firebase_messaging: ^15.1.5
+  flutter_local_notifications: ^18.0.1
+
+  # Image
+  image_picker: ^1.1.2
+  image_cropper: ^8.0.2
+
+  # OAuth
+  flutter_web_auth_2: ^4.0.1
+
+  # WebSocket
+  web_socket_channel: ^3.0.1
+
+  # Location
+  geolocator: ^13.0.2
+  geocoding: ^3.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+  # Code Generation
+  build_runner: ^2.4.13
+  riverpod_generator: ^2.6.2
+  freezed: ^2.5.7
+  json_serializable: ^6.8.0
+  retrofit_generator: ^9.1.5
+
+flutter:
+  uses-material-design: true
+
+  # assets:
+  #   - assets/images/
+  #   - assets/icons/
+
+  # fonts:
+  #   - family: Pretendard
+  #     fonts:
+  #       - asset: assets/fonts/Pretendard-Regular.otf
+  #         weight: 400
+  #       - asset: assets/fonts/Pretendard-Medium.otf
+  #         weight: 500
+  #       - asset: assets/fonts/Pretendard-SemiBold.otf
+  #         weight: 600
+  #       - asset: assets/fonts/Pretendard-Bold.otf
+  #         weight: 700

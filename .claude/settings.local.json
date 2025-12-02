@@ -1,0 +1,37 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd:*)",
+      "Bash(cat:*)",
+      "Bash(xargs:*)",
+      "Bash(find:*)",
+      "Bash(wc:*)",
+      "Bash(npm install)",
+      "Bash(npm run dev:*)",
+      "Bash(./gradlew bootRun:*)",
+      "Bash(gradle wrapper:*)",
+      "Bash(java:*)",
+      "Bash(curl:*)",
+      "Bash(./gradlew.bat bootRun)",
+      "Bash(docker:*)",
+      "Bash(findstr:*)",
+      "Bash(docker-compose up:*)",
+      "Bash(./gradlew.bat bootRun:*)",
+      "Bash(powershell -Command \"Invoke-RestMethod -Uri ''http://localhost:8080/api/auth/register'' -Method POST -ContentType ''application/json'' -Body ''{\"\"email\"\":\"\"test@example.com\"\",\"\"password\"\":\"\"password123\"\",\"\"brandName\"\":\"\"TestBrand\"\",\"\"industry\"\":\"\"retail\"\"}''\")",
+      "Bash(powershell -Command:*)",
+      "Bash(ConvertTo-Json)",
+      "Bash(del \"c:\\Users\\ddd\\Desktop\\User Authentication Flow\\backend\\java-worker\\src\\main\\java\\com\\autoreplyx\\controller\\MessageLogController.java\")",
+      "Bash(npm install:*)",
+      "Bash(flutter create:*)",
+      "Bash(flutter --version:*)",
+      "Bash(C:flutterbinflutter.bat --version)",
+      "Bash(powershell -ExecutionPolicy Bypass -File \"c:\\Users\\ddd\\Desktop\\User Authentication Flow\\app\\setup_dirs.ps1\")",
+      "Bash(git init:*)",
+      "Bash(git add:*)",
+      "Bash(git rm:*)",
+      "Bash(git commit:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

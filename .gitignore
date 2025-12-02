@@ -1,0 +1,32 @@
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Build outputs
+build/
+dist/
+out/
+target/
+
+# Dependencies
+node_modules/
+
+# Secrets
+*.pem
+*.key
+credentials.json
+node_modules
