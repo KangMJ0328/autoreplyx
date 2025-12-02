@@ -35,24 +35,25 @@ public class DashboardController {
     @GetMapping("/stats")
     public ResponseEntity<?> stats() {
         User user = getCurrentUser();
+        LocalDateTime todayStart = LocalDate.now().atStartOfDay();
         LocalDateTime thirtyDaysAgo = LocalDateTime.now().minusDays(30);
-        LocalDateTime sixtyDaysAgo = LocalDateTime.now().minusDays(60);
 
         long totalMessages = messageLogRepository.countByUserIdAndCreatedAtAfter(user.getId(), thirtyDaysAgo);
+        long todayMessages = messageLogRepository.countByUserIdAndCreatedAtAfter(user.getId(), todayStart);
         long aiResponses = messageLogRepository.countByUserIdAndResponseTypeAndCreatedAtAfter(user.getId(), "AI", thirtyDaysAgo);
-        long ruleResponses = messageLogRepository.countByUserIdAndResponseTypeAndCreatedAtAfter(user.getId(), "RULE", thirtyDaysAgo);
-
-        long prevTotalMessages = messageLogRepository.countByUserIdAndCreatedAtBetween(user.getId(), sixtyDaysAgo, thirtyDaysAgo);
-        long prevAiResponses = messageLogRepository.countByUserIdAndResponseTypeAndCreatedAtBetween(user.getId(), "AI", sixtyDaysAgo, thirtyDaysAgo);
-        long prevRuleResponses = messageLogRepository.countByUserIdAndResponseTypeAndCreatedAtBetween(user.getId(), "RULE", sixtyDaysAgo, thirtyDaysAgo);
+        long totalResponses = aiResponses + messageLogRepository.countByUserIdAndResponseTypeAndCreatedAtAfter(user.getId(), "RULE", thirtyDaysAgo);
+        long activeChannels = channelRepository.countByUserIdAndIsActive(user.getId(), true);
+        long activeRules = autoRuleRepository.countByUserIdAndIsActive(user.getId(), true);
 
         Map<String, Object> response = new HashMap<>();
-        response.put("total_messages", totalMessages);
-        response.put("ai_responses", aiResponses);
-        response.put("rule_responses", ruleResponses);
-        response.put("message_change", calculateChange(totalMessages, prevTotalMessages));
-        response.put("ai_change", calculateChange(aiResponses, prevAiResponses));
-        response.put("rule_change", calculateChange(ruleResponses, prevRuleResponses));
+        response.put("totalMessages", totalMessages);
+        response.put("todayMessages", todayMessages);
+        response.put("totalResponses", totalResponses);
+        response.put("aiResponses", aiResponses);
+        response.put("responseRate", totalMessages > 0 ? (double) totalResponses / totalMessages * 100 : 0.0);
+        response.put("avgResponseTime", 0.0);
+        response.put("activeChannels", activeChannels);
+        response.put("activeRules", activeRules);
 
         return ResponseEntity.ok(response);
     }

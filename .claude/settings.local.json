@@ -35,7 +35,10 @@
       "Bash(git push:*)",
       "Bash(git config:*)",
       "Bash(git remote remove:*)",
-      "Bash(del \"c:\\Users\\ddd\\Desktop\\User Authentication Flow\\backend\\java-worker\\src\\main\\java\\com\\autoreplyx\\config\\RedisConfig.java\")"
+      "Bash(del \"c:\\Users\\ddd\\Desktop\\User Authentication Flow\\backend\\java-worker\\src\\main\\java\\com\\autoreplyx\\config\\RedisConfig.java\")",
+      "Bash(C:flutterbinflutter.bat build apk --release)",
+      "Bash(flutter build:*)",
+      "Bash(dir \"c:\\Users\\ddd\\Desktop\\User Authentication Flow\\app\\lib\" /s /b)"
     ],
     "deny": [],
     "ask": []
