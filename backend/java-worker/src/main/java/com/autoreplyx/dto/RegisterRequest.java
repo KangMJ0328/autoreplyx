@@ -11,7 +11,7 @@ public class RegisterRequest {
     @JsonProperty("password_confirmation")
     private String passwordConfirmation;
 
-    @JsonProperty("brand_name")
+    @JsonProperty("brandName")
     private String brandName;
 
     private String industry;

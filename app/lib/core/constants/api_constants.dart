@@ -1,5 +1,5 @@
 class ApiConstants {
-  static const String baseUrl = 'https://autoreplyx.onrender.com/api';
+  static const String baseUrl = 'https://original-gertie-autoplyx-200c1a3a.koyeb.app/api';
 
   // Auth endpoints
   static const String login = '/auth/login';
