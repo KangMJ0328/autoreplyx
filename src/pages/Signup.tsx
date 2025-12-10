@@ -57,7 +57,32 @@ export default function Signup() {
       });
       navigate('/onboarding');
     } catch (err: any) {
-      setError(err.response?.data?.message || '회원가입에 실패했습니다. 다시 시도해주세요.');
+      // Extract error message from various response formats
+      const errorData = err.response?.data;
+      let errorMessage = '회원가입에 실패했습니다. 다시 시도해주세요.';
+
+      if (errorData) {
+        if (typeof errorData === 'string') {
+          errorMessage = errorData;
+        } else if (errorData.message) {
+          errorMessage = errorData.message;
+        } else if (errorData.error) {
+          errorMessage = errorData.error;
+        } else if (errorData.errors) {
+          // Handle validation errors object
+          const errors = Object.values(errorData.errors).flat();
+          if (errors.length > 0) {
+            errorMessage = errors.join(', ');
+          }
+        }
+      }
+
+      // Add HTTP status info for debugging
+      if (err.response?.status === 400) {
+        console.error('Registration failed:', errorData);
+      }
+
+      setError(errorMessage);
     } finally {
       setIsLoading(false);
     }

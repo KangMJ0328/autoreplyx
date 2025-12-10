@@ -246,11 +246,19 @@ export const authAPI = {
     brand_name: string;
     industry: string;
   }) => {
+    // Convert to backend expected format (camelCase for brandName)
+    const requestData = {
+      email: data.email,
+      password: data.password,
+      password_confirmation: data.password_confirmation,
+      brandName: data.brand_name,
+      industry: data.industry,
+    };
     const response = await api.post<{
       access_token: string;
       refresh_token: string;
       user: User;
-    }>('/auth/register', data);
+    }>('/auth/register', requestData);
 
     localStorage.setItem('access_token', response.data.access_token);
     localStorage.setItem('refresh_token', response.data.refresh_token);
