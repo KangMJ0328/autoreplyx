@@ -6,7 +6,7 @@ services:
     staticPublishPath: ./build
     envVars:
       - key: VITE_API_URL
-        value: https://autoreplyx.onrender.com/api
+        value: https://original-gertie-autoplyx-200c1a3a.koyeb.app/api
     routes:
       - type: rewrite
         source: /*
